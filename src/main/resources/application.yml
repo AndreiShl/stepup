@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stepup
+    username: postgres
+    password: secret
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+config:
+    folder: C:\work\java\basecode\part2\task4\src\main\resources\files\
+    separator: ;
+    logpath : C:\Temp\log.txt
