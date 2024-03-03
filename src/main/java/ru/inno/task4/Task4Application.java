@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import ru.inno.task4.service.*;
-import ru.inno.task4.util.LogUtils;
 
 import java.io.IOException;
 
@@ -15,9 +14,9 @@ public class Task4Application {
         LoginFileReaderable fileReaderable = context.getBean(LoginFileReader.class);
         StoredData storedData = fileReaderable
                 .readData()
-                .fix(LogUtils.logTransform(new FixApplication()))
-                .fix(LogUtils.logTransform(new FixCapitalized()))
-                .fix(new FixDates().setLogPath("C:\\Temp\\log1.txt"))
+                .fix(new FixApplication())
+                .fix(new FixCapitalized())
+                .fix(new FixDates("C:\\Temp\\log1.txt"))
                 ;
         System.out.println(storedData);
         SaveData saveData = context.getBean(SaveData.class);

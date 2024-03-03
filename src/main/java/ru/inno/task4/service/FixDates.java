@@ -1,29 +1,28 @@
 package ru.inno.task4.service;
 
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.stereotype.Component;
+import ru.inno.task4.model.Login;
+import ru.inno.task4.model.User;
 
-@Component
+import java.util.ArrayList;
+import java.util.List;
+
+@AllArgsConstructor
 public class FixDates implements DataFixable{
-
     private String logPath;
-
-    public FixDates setLogPath(String logPath){
-        this.logPath = logPath;
-        return this;
-    }
 
     @SneakyThrows
     @Override
     public StoredData fix(StoredData storedData) {
-        System.out.println("logPath = " + logPath);
+        List<Login> loginList = new ArrayList<>(storedData.logins());
+        List<User> userList = new ArrayList<>();
         try (var log = new Log(logPath)) {
-            storedData.logins().removeIf(login -> login.getAccess_date() == null && log.putLog("Empty date " + login) );
-            return storedData;
-
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            throw new WriteLogFileException();
+            loginList.removeIf(login -> login.getAccess_date() == null && log.putLog("Empty date " + login) );
+            loginList.forEach(login -> {
+                if (!userList.contains(login.getUser())) userList.add(login.getUser());
+            });
+            return new StoredData(loginList, userList);
         }
     }
 }

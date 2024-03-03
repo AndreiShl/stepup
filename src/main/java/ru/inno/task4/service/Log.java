@@ -2,14 +2,15 @@ package ru.inno.task4.service;
 
 import lombok.AllArgsConstructor;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 @AllArgsConstructor
 public class Log implements Logable,AutoCloseable {
-    private PrintWriter log;
+    private FileWriter log;
     public boolean putLog(String log) {
         try {
-            this.log.write(log);
+            this.log.append(log);
             return true;
         }
         catch (Exception e){
@@ -17,8 +18,8 @@ public class Log implements Logable,AutoCloseable {
         }
     }
 
-    public Log(String logPath) throws FileNotFoundException {
-        this.log = new PrintWriter(logPath);
+    public Log(String logPath) throws IOException {
+        this.log = new FileWriter(logPath,true);
     }
 
     @Override

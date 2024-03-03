@@ -1,6 +1,6 @@
 package ru.inno.task4.service;
 
-//@FunctionalInterface
+@FunctionalInterface
 public interface DataFixable {
     StoredData fix(StoredData storedData);
 }
