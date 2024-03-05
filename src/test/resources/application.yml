@@ -13,3 +13,4 @@ config:
     folder: C:\work\java\basecode\part2\task4\src\test\resources\files\
     separator: ;
     logpath : C:\Temp\log.txt
+    logFIxData : C:\Temp\logFixDatesTest.txt

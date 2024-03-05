@@ -9,7 +9,7 @@ import ru.inno.task4.model.User;
 public class FixCapitalized implements DataFixable {
 
     @Override
-    @LogTransformation(logPath = "C:\\Temp\\log.txt")
+    @LogTransformation(logPath = "C:\\Temp\\logFixCapitalized.txt")
     public StoredData fix(StoredData storedData) {
         for (User user: storedData.users()) {
             user.setFio(WordUtils.capitalizeFully(user.getFio()));

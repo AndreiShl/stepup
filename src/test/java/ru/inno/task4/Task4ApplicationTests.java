@@ -32,6 +32,8 @@ class Task4ApplicationTests {
     LoginRepository loginRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    TestLogTransformation testLogTransformation;
 
     private StoredData generateTestData() {
         var user1 = new User();
@@ -147,7 +149,7 @@ class Task4ApplicationTests {
         var logfileNamePath = Path.of(logfileName);
         String allLog;
         Files.deleteIfExists(logfileNamePath);
-        generateTestData().fix(new TestLogTransformation());
+        generateTestData().fix(testLogTransformation);
         try (FileInputStream fileInputStream = new FileInputStream(logfileName)){
             allLog = IOUtils.toString(fileInputStream, "UTF-8");
         }
